@@ -1,14 +1,9 @@
 package appdata
 
 import (
-	"log"
 	"os"
 	"path"
 )
-
-func init() {
-	log.Print("appdata - initializing  package")
-}
 
 type AppDataManager struct {
 	ApplicationPath string
@@ -27,14 +22,12 @@ func CreateAppDataManager(appPath string) (AppDataManager, error) {
 func (m AppDataManager) createDirectory() error {
 	path := m.getDirectory()
 	_, err := os.Stat(path)
-	// log.Printf("Checking if path %s exists", path)
 	if os.IsNotExist(err) {
 		return os.Mkdir(path, 0755)
 	}
 	if err != nil {
 		return err
 	}
-	// log.Printf("Path %s exists", path)
 	return nil
 }
 
